@@ -26,11 +26,11 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 script {
-                    // Run the container and execute Maven tests
-                    // The .inside() method ensures the workspace is mounted and reports are saved back to Jenkins
-                    docker.image("${IMAGE_NAME}:${env.BUILD_ID}").inside("--shm-size=2g") {
-                        sh 'mvn test -Dheadless=true'
-                    }
+                    // On Windows, the .inside() method often fails because it tries to pass a Windows path (C:\...)
+                    // as the container's working directory. Using a manual 'docker run' avoids this.
+                    // We convert the Windows path to use forward slashes for Docker compatibility.
+                    def workspacePath = env.WORKSPACE.replace('\\', '/')
+                    sh "docker run --rm --shm-size=2g -v \"${workspacePath}:/app\" -w /app ${IMAGE_NAME}:${env.BUILD_ID} mvn test -Dheadless=true"
                 }
             }
         }
