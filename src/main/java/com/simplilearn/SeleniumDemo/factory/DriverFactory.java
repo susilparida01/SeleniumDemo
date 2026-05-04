@@ -26,7 +26,11 @@ public class DriverFactory {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions co = new ChromeOptions();
 			if (headless) co.addArguments("--headless=new");
-			co.addArguments("--start-maximized");
+			co.addArguments("--no-sandbox");
+			co.addArguments("--disable-dev-shm-usage");
+			co.addArguments("--disable-gpu");
+			co.addArguments("--window-size=1920,1080");
+			//co.addArguments("--start-maximized");
 			tlDriver.set(new ChromeDriver(co));
 			break;
 		
