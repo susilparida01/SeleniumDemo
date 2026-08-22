@@ -8,10 +8,10 @@ The current suite validates login behavior, dashboard quick-launch navigation, a
 
 - Java 21
 - Maven
-- Selenium Java 4.37.0
-- TestNG 7.11.0
-- WebDriverManager 6.3.2
-- ExtentReports 5.1.1
+- Selenium Java 4.x.x
+- TestNG 7.x.x
+- WebDriverManager 6.x.x
+- ExtentReports 5.x.x
 - Commons IO
 - AutoIT for native Windows file-upload dialog handling
 
